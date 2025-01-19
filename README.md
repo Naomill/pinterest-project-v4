@@ -1,4 +1,5 @@
 **Pinterest Web App Project**
+
 This web app includes the following features
 
 - User Authentication: Users can register and log in using Supabase for authentication.
