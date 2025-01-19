@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
+import { supabase } from '../lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 type AuthMode = 'login' | 'register';
 
 export default function AuthPage() {
-  const navigate = useNavigate();
   const [mode, setMode] = useState<AuthMode>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [birthdate, setBirthdate] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate(); // To navigate after successful login/register
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setLoading(true);
 
     try {
       if (mode === 'register') {
-        const { error: signUpError } = await supabase.auth.signUp({
+        const { data, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -34,9 +37,13 @@ export default function AuthPage() {
 
         if (signUpError) throw signUpError;
 
-        // Switch to login mode after successful registration
-        setMode('login');
-        setError('Registration successful! Please log in.');
+        // Clear form fields
+        setEmail('');
+        setPassword('');
+        setBirthdate('');
+
+        // Display success message for registration
+        setSuccess('Registration successful! Please log in with your new account.');
       } else {
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email,
@@ -46,7 +53,8 @@ export default function AuthPage() {
         if (signInError) throw signInError;
 
         // Redirect to home page after successful login
-        navigate('/');
+        setSuccess('Login successful!');
+        navigate('/'); // Navigate to home page after successful login
       }
     } catch (err: any) {
       setError(err.message);
@@ -56,10 +64,10 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 bg-[url('https://i.pinimg.com/736x/6e/27/4f/6e274fb2dd976a8ba9833b8dcc3f969c.jpg')] bg-cover bg-center">
       <div className="bg-white rounded-2xl p-8 max-w-md w-full relative">
         <button
-          onClick={() => navigate('/')}
+          onClick={() => window.history.back()} // Go back to previous page
           className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
         >
           ✕
@@ -92,6 +100,12 @@ export default function AuthPage() {
         {error && (
           <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm">
             {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-lg text-sm">
+            {success}
           </div>
         )}
 
@@ -160,14 +174,21 @@ export default function AuthPage() {
               : 'Continue'}
           </button>
         </form>
-
+        
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             {mode === 'login'
               ? 'Not a member of Pinterest yet?'
               : 'Already a member?'}{' '}
             <button
-              onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
+              onClick={() => {
+                setMode(mode === 'login' ? 'register' : 'login');
+                setError('');
+                setSuccess('');
+                setEmail('');
+                setPassword('');
+                setBirthdate('');
+              }}
               className="text-red-600 hover:underline"
             >
               {mode === 'login' ? 'Sign up' : 'Log in'}

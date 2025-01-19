@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Search,
   Bell,
@@ -22,6 +22,7 @@ interface RecentSearch {
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -129,6 +130,7 @@ const Navbar = () => {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
+      setIsProfileOpen(false);
       navigate('/auth');
     } catch (err) {
       console.error('Error logging out:', err);
@@ -320,7 +322,13 @@ const Navbar = () => {
                     Try exploring your home feed, creating a board or following
                     someone with ideas that inspire you.
                   </p>
-                  <button className="bg-gray-100 px-4 py-2 rounded-full hover:bg-gray-200 transition-colors">
+                  <button 
+                    onClick={() => {
+                      setIsNotificationsOpen(false);
+                      navigate('/');
+                    }}
+                    className="bg-gray-100 px-4 py-2 rounded-full hover:bg-gray-200 transition-colors"
+                  >
                     Go to home feed
                   </button>
                 </div>
@@ -389,7 +397,6 @@ const Navbar = () => {
             <button
               className="p-2 hover:bg-gray-100 rounded-full"
               onClick={() => setIsProfileOpen(!isProfileOpen)}
-              ref={profileDropdownRef}
             >
               <ChevronDown size={24} />
             </button>
@@ -397,7 +404,7 @@ const Navbar = () => {
 
           {isProfileOpen && (
             <div
-              className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2"
+              className="absolute right-4 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2"
               style={{ top: '100%' }}
               ref={dropdownRef}
             >
