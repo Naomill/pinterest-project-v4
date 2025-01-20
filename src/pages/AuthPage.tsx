@@ -141,7 +141,7 @@ export default function AuthPage() {
 
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
-            {mode === 'login' ? 'Not on Pinterest yet? Pinterest' : 'Already a member?'}
+            {mode === 'login' ? 'Not on Pinterest yet?' : 'Already a member?'}
             {' '}
             <button
               onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
