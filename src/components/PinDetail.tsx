@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  ArrowLeft,
-  Heart,
-  Share2,
-  MoreHorizontal,
-  Image,
-  Smile,
-  Camera,
-  Trash2,
-} from 'lucide-react';
+import { ArrowLeft, Heart, Share2, MoreHorizontal, Image, Smile, Camera, Trash2 } from 'lucide-react';
 import { Pin } from '../types';
+import ShareMenu from './ShareMenu';
 
 interface PinDetailProps {
   pin: Pin;
@@ -31,10 +23,17 @@ const PinDetail: React.FC<PinDetailProps> = ({
   onDelete,
 }) => {
   const [showDropdown, setShowDropdown] = React.useState(false);
+  const [showShareMenu, setShowShareMenu] = React.useState(false);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden relative">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div 
+        className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden relative"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           onClick={onClose}
           className="absolute top-4 left-4 p-2 hover:bg-gray-100 rounded-full z-10"
@@ -56,7 +55,10 @@ const PinDetail: React.FC<PinDetailProps> = ({
           <div className="p-8 overflow-y-auto max-h-[90vh]">
             <div className="flex justify-between items-center mb-6">
               <div className="flex space-x-2">
-                <button className="p-2 hover:bg-gray-100 rounded-full">
+                <button 
+                  className="p-2 hover:bg-gray-100 rounded-full"
+                  onClick={() => setShowShareMenu(true)}
+                >
                   <Share2 size={24} />
                 </button>
                 {isCreatedByUser && (
@@ -166,6 +168,13 @@ const PinDetail: React.FC<PinDetailProps> = ({
           </div>
         </div>
       </div>
+
+      {showShareMenu && (
+        <ShareMenu
+          url={window.location.href}
+          onClose={() => setShowShareMenu(false)}
+        />
+      )}
     </div>
   );
 };

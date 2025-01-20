@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { MoreHorizontal, Share2, ExternalLink, Trash2 } from 'lucide-react';
 import { usePins } from '../context/PinContext';
 import PinDetail from '../components/PinDetail';
+import ShareMenu from '../components/ShareMenu';
 import { Pin } from '../types';
 
 const HomePage = () => {
   const { pins, user, savePin, unsavePin, deletePin } = usePins();
   const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
   const [showDropdown, setShowDropdown] = useState<string | null>(null);
+  const [showShareMenu, setShowShareMenu] = useState(false);
 
   const handlePinClick = (pin: Pin) => {
     setSelectedPin(pin);
@@ -26,6 +28,11 @@ const HomePage = () => {
     e.stopPropagation();
     deletePin(pinId);
     setShowDropdown(null);
+  };
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowShareMenu(true);
   };
 
   return (
@@ -49,7 +56,10 @@ const HomePage = () => {
                     className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <button className="p-2 bg-white rounded-full hover:bg-gray-100 mr-2">
+                    <button 
+                      className="p-2 bg-white rounded-full hover:bg-gray-100 mr-2"
+                      onClick={handleShare}
+                    >
                       <Share2 size={20} />
                     </button>
                     <div className="relative inline-block">
@@ -57,9 +67,7 @@ const HomePage = () => {
                         className="p-2 bg-white rounded-full hover:bg-gray-100"
                         onClick={(e) => {
                           e.stopPropagation();
-                          setShowDropdown(
-                            showDropdown === pin.id ? null : pin.id
-                          );
+                          setShowDropdown(showDropdown === pin.id ? null : pin.id);
                         }}
                       >
                         <MoreHorizontal size={20} />
@@ -120,6 +128,13 @@ const HomePage = () => {
             deletePin(selectedPin.id);
             setSelectedPin(null);
           }}
+        />
+      )}
+
+      {showShareMenu && (
+        <ShareMenu
+          url={window.location.href}
+          onClose={() => setShowShareMenu(false)}
         />
       )}
     </>

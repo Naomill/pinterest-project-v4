@@ -136,6 +136,126 @@ export function PinProvider({ children }: { children: React.ReactNode }) {
         'https://i.pinimg.com/736x/03/70/aa/0370aa864b5eedecb2e9e27d940bb451.jpg',
       title: 'Lo-fi Chill Vibes',
     },
+    {
+      id: '21',
+      image:
+        'https://i.pinimg.com/736x/a1/d5/94/a1d594494bad200f62c5cfa72a798fd5.jpg',
+      title: 'Maomao',
+    },
+    {
+      id: '22',
+      image:
+        'https://i.pinimg.com/736x/54/77/bb/5477bbffa71c7e193c19289df06c826f.jpg',
+      title: 'Majestic Mountain',
+    },
+    {
+      id: '23',
+      image:
+        'https://i.pinimg.com/736x/3a/1c/c3/3a1cc31c344507cbdba0daf76e05603f.jpg',
+      title: 'Graceful Elegance',
+    },
+    {
+      id: '24',
+      image:
+        'https://i.pinimg.com/736x/7e/02/20/7e022025b47a9e0ed5bc062825bffe8f.jpg',
+      title: 'Starlit Horizon',
+    },
+    {
+      id: '25',
+      image:
+        'https://i.pinimg.com/736x/89/ad/a9/89ada96a67a5a7a28567b33f473e8188.jpg',
+      title: 'Celestial Glow',
+    },
+    {
+      id: '26',
+      image:
+        'https://i.pinimg.com/736x/49/8d/e6/498de66129d1a998eda4f1418c775e24.jpg',
+      title: 'money TT',
+    },
+    {
+      id: '27',
+      image:
+        'https://i.pinimg.com/736x/ee/d8/0b/eed80bca70df121e3edc2ef161ff9cea.jpg',
+      title: 'pay attention',
+    },
+    {
+      id: '28',
+      image:
+        'https://i.pinimg.com/736x/f6/b7/df/f6b7dfdf7685cccd9edbc726c3871f72.jpg',
+      title: 'Cosmic Dreams',
+    },
+    {
+      id: '29',
+      image:
+        'https://i.pinimg.com/736x/3b/8d/ff/3b8dff7b0178659a2a6b12cb58efba08.jpg',
+      title: 'Night Sky Reflection',
+    },
+    {
+      id: '30',
+      image:
+        'https://i.pinimg.com/736x/d9/11/a0/d911a0fd2b1d3736fb073e6e8b6d296a.jpg',
+      title: 'Never gonna give you up',
+    },
+    {
+      id: '31',
+      image:
+        'https://i.pinimg.com/736x/fe/bb/8c/febb8c59c298aaea712831d7dbd166e8.jpg',
+      title: 'chill guy',
+    },
+    {
+      id: '32',
+      image:
+        'https://i.pinimg.com/736x/f4/ca/f2/f4caf20851ce933e294a3e9999ecbc5e.jpg',
+      title: 'Cosmic Serenity',
+    },
+    {
+      id: '33',
+      image:
+        'https://i.pinimg.com/736x/80/14/36/8014367cc41ed4ae0ec15ca1ac55e8dd.jpg',
+      title: 'chill girl',
+    },
+    {
+      id: '34',
+      image:
+        'https://i.pinimg.com/736x/70/bd/95/70bd952691706e370d0d23944f423ac5.jpg',
+      title: 'Twilight Harmony',
+    },
+    {
+      id: '35',
+      image:
+        'https://i.pinimg.com/736x/8f/86/b3/8f86b39c56f6b061e6e29d06c50658c2.jpg',
+      title: 'Stellar Journey',
+    },
+    {
+      id: '36',
+      image:
+        'https://i.pinimg.com/736x/6f/61/36/6f6136aa47fd1845f3e889fad9d73c78.jpg',
+      title: 'Nightfall Magic',
+    },
+    {
+      id: '37',
+      image:
+        'https://i.pinimg.com/736x/d8/24/48/d824489653ac52a0fd0e0532e39fdf6e.jpg',
+      title: "when i wfh",
+    },
+    {
+      id: '38',
+      image:
+        'https://i.pinimg.com/736x/0f/10/d9/0f10d9d32ae338bda786bcbc30e7f9fc.jpg',
+      title: 'Last Game',
+    },
+    {
+      id: '39',
+      image:
+        'https://i.pinimg.com/736x/4d/ed/3a/4ded3a5d656427d0e34fa57617ac3577.jpg',
+      title: 'MOM SAID NO',
+    },
+    {
+      id: '40',
+      image:
+        'https://i.pinimg.com/736x/dc/0c/ef/dc0cefef0cec270bf3a5b162d9516539.jpg',
+      title: 'new home ;-;',
+    },
   ]);
 
   const [user, setUser] = useState<User>({
